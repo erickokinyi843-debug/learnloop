@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f7fb" />
+    <meta
+      name="description"
+      content="Learn something new, meet curious minds, and level up together on Learnloop."
+    />
+    <title>Learnloop — Grow together</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="auth-screen" id="auth-screen">
+      <section class="auth-intro">
+        <a class="brand auth-brand" href="#" aria-label="Learnloop home">
+          <span class="brand-mark" aria-hidden="true">✓</span>
+          <span>learnloop<span class="brand-period">.</span></span>
+        </a>
+        <div class="auth-intro-copy">
+          <span class="auth-kicker"><span class="live-dot"></span> A LITTLE PROGRESS, EVERY DAY</span>
+          <h1>Your next big thing starts with one small step.</h1>
+          <p>Build a learning habit, keep your progress, and celebrate every new thing you discover.</p>
+          <div class="auth-benefits"><span>✦ Beginner-friendly lessons</span><span>◷ Pick up where you left off</span><span>♧ Learn at your own pace</span></div>
+        </div>
+        <span class="auth-footnote">A welcoming space for curious minds.</span>
+      </section>
+      <section class="auth-side">
+        <div class="auth-card">
+          <div class="auth-card-heading">
+            <span class="auth-card-icon">✳</span>
+            <p class="auth-eyebrow">WELCOME TO LEARNLOOP</p>
+            <h2 id="auth-title">Welcome back</h2>
+            <p id="auth-subtitle">Sign in to pick up where you left off.</p>
+          </div>
+          <div class="auth-tabs" role="tablist" aria-label="Account options">
+            <button type="button" class="auth-tab is-active" data-auth-mode="signin" role="tab" aria-selected="true">Sign in</button>
+            <button type="button" class="auth-tab" data-auth-mode="signup" role="tab" aria-selected="false">Create student account</button>
+          </div>
+          <form id="auth-form" class="auth-form">
+            <label id="auth-name-wrap" hidden>Full name<input id="auth-name" name="name" autocomplete="name" maxlength="60" placeholder="Your name" /></label>
+            <label id="auth-school-wrap" hidden>School<input id="auth-school" name="school" autocomplete="organization" maxlength="120" placeholder="Your school" /></label>
+            <label id="auth-grade-wrap" hidden>Grade / level<input id="auth-grade" name="grade" list="grade-suggestions" maxlength="80" autocomplete="off" placeholder="Choose or type a grade / level" required /></label>
+            <label id="auth-setup-key-wrap" hidden>One-time admin setup key<input id="auth-setup-key" name="setupKey" type="password" autocomplete="off" placeholder="Provided by the server owner" /></label>
+            <label>Email address<input id="auth-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com" /></label>
+            <label>Password<span class="password-field"><input id="auth-password" name="password" type="password" autocomplete="current-password" required minlength="10" maxlength="128" placeholder="At least 10 characters" /><button class="password-visibility" type="button" data-password-toggle="auth-password" aria-label="Show password" aria-pressed="false">Show</button></span></label>
+            <label id="auth-confirm-wrap" hidden>Confirm password<span class="password-field"><input id="auth-confirm-password" name="confirmPassword" type="password" autocomplete="new-password" minlength="10" maxlength="128" placeholder="Re-enter your password" /><button class="password-visibility" type="button" data-password-toggle="auth-confirm-password" aria-label="Show confirm password" aria-pressed="false">Show</button></span></label>
+            <p class="auth-error" id="auth-error" role="alert" hidden></p>
+            <button class="auth-submit" id="auth-submit" type="submit">Sign in <span>→</span></button>
+            <a class="auth-back-button" id="admin-entry-link" href="?admin=1">Admin sign in</a>
+            <a class="auth-back-button" id="auth-back-button" href="./" hidden>← Back to student sign in</a>
+            <button type="button" class="auth-back-button" id="invite-signin-button" hidden>Already have an account? Sign in to accept</button>
+            <button type="button" class="auth-back-button" id="invite-signup-button" hidden>New here? Create an account to accept</button>
+          </form>
+          <p class="server-note" hidden><strong>Server-backed accounts:</strong> passwords, learning progress, and uploaded files are stored by the server. Admin API access requires the administrator account.</p>
+        </div>
+      </section>
+    </main>
+    <div class="app-shell" id="app-shell" hidden>
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Learnloop home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <path d="M7 10.5 18 5l11 5.5v15L18 31 7 25.5v-15Z" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+              <path d="m12 18 4 4 8-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>learnloop<span class="brand-period">.</span></span>
+        </a>
+
+        <div class="nav-label" data-i18n="menu">MENU</div>
+        <nav class="main-nav">
+          <button class="nav-link is-active" data-page="home">
+            <span class="nav-icon">⌂</span><span data-i18n="home">Home</span>
+          </button>
+          <button class="nav-link" data-page="explore">
+            <span class="nav-icon">⌕</span><span data-i18n="explore">Explore</span>
+          </button>
+          <button class="nav-link" data-page="my-learning">
+            <span class="nav-icon">▤</span><span data-i18n="myLearning">My learning</span>
+            <span class="nav-count">4</span>
+          </button>
+          <button class="nav-link" data-page="leaderboard">
+            <span class="nav-icon">♧</span><span data-i18n="leaderboard">Leaderboard</span>
+          </button>
+        </nav>
+
+        <div class="nav-label community-label" data-i18n="community">COMMUNITY</div>
+        <nav class="main-nav">
+          <button class="nav-link" data-page="study-groups">
+            <span class="nav-icon">♧</span><span data-i18n="studyGroups">Study groups</span>
+            <span class="nav-dot"></span>
+          </button>
+          <button class="nav-link" data-page="messages">
+            <span class="nav-icon">▱</span><span data-i18n="messages">Messages</span>
+          </button>
+          <button class="nav-link" data-page="admin" id="admin-nav-link" hidden>
+            <span class="nav-icon">⚙</span><span>Admin</span>
+          </button>
+        </nav>
+
+        <section class="streak-card">
+          <div class="streak-top"><span class="flame">✦</span><span class="streak-number">Your first streak</span></div>
+          <p>Finish your first lesson to start tracking your learning streak.</p>
+          <div class="streak-week" aria-label="Weekly activity">
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+          </div>
+        </section>
+
+        <button class="sidebar-profile" aria-label="Open profile">
+          <span class="avatar avatar-you">J</span>
+          <span class="profile-copy"><strong id="profile-name">Learner</strong><small id="profile-role">Student account</small></span>
+          <span class="profile-more">···</span>
+        </button>
+        <button class="sign-out-button" id="sign-out-button" type="button">Sign out <span>↗</span></button>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="mobile-brand">
+            <span class="brand-mark" aria-hidden="true">✓</span> learnloop<span class="brand-period">.</span>
+          </div>
+          <div class="breadcrumb"><span data-i18n="dashboard">Dashboard</span><span class="crumb-slash">/</span><strong id="current-section" data-i18n="home">Home</strong></div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <span class="search-icon">⌕</span>
+              <input id="global-search" type="search" placeholder="Search subjects, lessons..." aria-label="Search subjects and lessons" />
+              <kbd>⌘ K</kbd>
+            </label>
+            <div class="language-wrap">
+              <button class="language-button" id="language-button" aria-label="Choose language" aria-expanded="false">
+                <span class="globe">◎</span><span id="language-label">EN</span><span class="chevron">⌄</span>
+              </button>
+              <div class="language-menu" id="language-menu" hidden>
+                <button data-language="en">🇬🇧 English</button>
+                <button data-language="es">🇪🇸 Español</button>
+                <button data-language="fr">🇫🇷 Français</button>
+                <button data-language="de">🇩🇪 Deutsch</button>
+                <button data-language="pt">🇧🇷 Português</button>
+                <button data-language="hi">🇮🇳 हिन्दी</button>
+                <button data-language="ar">🇸🇦 العربية</button>
+                <button data-language="ja">🇯🇵 日本語</button>
+                <button data-language="zh">🇨🇳 中文</button>
+                <button data-language="sw">🇰🇪 Kiswahili</button>
+              </div>
+            </div>
+            <button class="icon-button notification-button" aria-label="Notifications">♧<span class="notification-dot"></span></button>
+            <button class="mobile-menu" aria-label="Toggle navigation" id="mobile-menu">☰</button>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <div id="dashboard-view">
+          <section class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="sparkle">✳</span> <span id="welcome-greeting">WELCOME</span></div>
+              <h1 data-i18n="welcome">Ready to grow today?</h1>
+              <p class="welcome-subtitle" data-i18n="welcomeSub">A little progress each day adds up to big results.</p>
+            </div>
+            <div class="welcome-actions">
+              <button class="text-button profile-edit-toggle" id="edit-profile-button" type="button">School &amp; grade</button>
+              <button class="primary-button" id="continue-learning"><span>▶</span><span data-i18n="continueLearning">Continue learning</span><span class="button-arrow">↗</span></button>
+            </div>
+          </section>
+          <section class="profile-update-card" id="profile-edit-panel" hidden>
+            <div><h2>Your school profile</h2><p>Choose your school and CBC grade to see the right learning areas.</p></div>
+            <form id="student-profile-form">
+              <label>School<input id="profile-school" maxlength="120" required /></label>
+              <label>Grade / level<input id="profile-grade" list="grade-suggestions" maxlength="80" autocomplete="off" placeholder="Choose or type a grade / level" required /></label>
+              <button type="submit" class="admin-secondary-button">Save profile</button>
+            </form>
+          </section>
+
+          <section class="starter-card" id="starter-card" hidden>
+            <div class="starter-icon">✦</div>
+            <div class="starter-copy"><span>YOUR FIRST STEP</span><h2>Start with the basics</h2><p>Your progress starts at zero. Try a short beginner lesson and build from there—no experience needed.</p></div>
+            <button type="button" class="starter-button" id="start-first-lesson">Start a beginner lesson <span>→</span></button>
+          </section>
+          <section class="resources-panel" id="student-resources" hidden>
+            <div class="section-heading"><div><h2>Notes &amp; exams</h2><p>Resources shared by your admin</p></div></div>
+            <ul class="student-resource-list" id="student-resource-list"></ul>
+          </section>
+          <section class="resources-panel certificates-panel" id="student-certificates" hidden>
+            <div class="section-heading"><div><h2>My certificates</h2><p>Certificates earned for assessments</p></div></div>
+            <div class="student-certificates-list" id="student-certificates-list"></div>
+          </section>
+
+          <section class="hero-banner">
+            <div class="hero-copy">
+              <span class="hero-kicker"><span class="live-dot"></span> <span data-i18n="dailyChallenge">TODAY'S DAILY CHALLENGE</span></span>
+              <h2 data-i18n="heroTitle">Small steps.<br />Big brain energy.</h2>
+              <p data-i18n="heroSub">Take a 5-minute quiz, earn bonus points, and see how you stack up.</p>
+              <button class="hero-button" id="start-challenge"><span data-i18n="takeChallenge">Take the challenge</span><span>↗</span></button>
+              <div class="challenge-meta"><span>◷ 1 question</span><span>✦ +80 XP</span><span>♧ Personal practice</span></div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="art-sun"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+              <div class="art-planet"><span>✳</span></div><div class="art-star star-one">✦</div><div class="art-star star-two">✧</div>
+              <div class="art-card card-top">5 min <span>↗</span></div><div class="art-card card-bottom">+250 XP <span>✦</span></div>
+            </div>
+            <div class="hero-pagination"><span class="active"></span><span></span><span></span></div>
+          </section>
+
+          <section class="stats-grid" aria-label="Learning overview">
+            <article class="stat-card">
+              <span class="stat-icon purple">◷</span><div class="stat-info"><span data-i18n="learningTime">Learning time</span><strong id="stat-learning-time">0 <small>hrs</small></strong></div>
+              <span class="stat-change">Start today</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon orange">✦</span><div class="stat-info"><span data-i18n="pointsEarned">Points earned</span><strong id="stat-points">0 <small>XP</small></strong></div>
+              <span class="stat-change">Start today</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon green">▣</span><div class="stat-info"><span data-i18n="lessonsDone">Lessons done</span><strong id="stat-lessons">0 <small>lessons</small></strong></div>
+              <span class="stat-change">Start today</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon pink">♧</span><div class="stat-info"><span data-i18n="friendsLearning">Friends learning</span><strong id="stat-friends">0 <small>friends</small></strong></div>
+              <span class="online-avatars"><i>A</i><i>M</i><i>+3</i></span>
+            </article>
+          </section>
+
+          <div class="content-grid">
+            <section class="subjects-section">
+              <div class="section-heading">
+                <div><h2 id="subjects-heading" tabindex="-1" data-i18n="popularSubjects">Explore popular subjects</h2><p id="subjects-subtitle" data-i18n="findNext">Find your next thing to learn</p></div>
+                <label class="subject-grade-select" id="admin-subject-grade-wrap" hidden>Grade
+                  <select id="admin-subject-grade" aria-label="Choose grade for subject management"></select>
+                </label>
+                <button class="text-button" data-page="explore"><span data-i18n="viewAll">View all</span> <span>→</span></button>
+              </div>
+              <div class="subject-filters" role="group" aria-label="Filter subjects">
+                <button class="filter-chip active" data-filter="all" data-i18n="allSubjects">All subjects</button>
+                <button class="filter-chip" data-filter="languages">Languages</button>
+                <button class="filter-chip" data-filter="stem">STEM</button>
+                <button class="filter-chip" data-filter="humanities">Humanities</button>
+                <button class="filter-chip" data-filter="creative">Creative &amp; life skills</button>
+              </div>
+              <div class="subject-grid" id="subject-grid"></div>
+            </section>
+
+            <aside class="right-column">
+              <section class="panel friends-panel">
+                <div class="panel-heading"><div><h2 data-i18n="friends">Friends</h2><p><span class="live-dot"></span> <span id="online-now-count">0</span> <span data-i18n="onlineNow">learners online now</span></p></div><button class="dots-button" aria-label="More friend options">···</button></div>
+                <p class="friends-empty">Your learner community is just getting started. Study groups and friend features can be added as students join.</p>
+                <button class="panel-link" data-page="study-groups"><span data-i18n="findStudyBuddies">Find study buddies</span> <span>→</span></button>
+              </section>
+              <section class="panel video-classes-panel" id="student-classes-panel">
+                <div class="panel-heading"><div><h2>Video classes</h2><p id="student-classes-subtitle">Classes for your grade</p></div></div>
+                <div class="student-classes-list" id="student-classes-list"></div>
+              </section>
+
+              <section class="panel leaderboard-panel">
+                    <div class="panel-heading"><div><h2 data-i18n="weeklyLeaders">Weekly leaders</h2><p data-i18n="yourCircle">Your circle is on fire</p></div><button class="dots-button" aria-label="More leaderboard options">···</button></div>
+                    <div id="student-leaderboard"></div>
+                    <button class="panel-link" data-page="leaderboard"><span data-i18n="fullLeaderboard">Full leaderboard</span> <span>→</span></button>
+              </section>
+
+              <section class="group-invite">
+                <div class="invite-icon">♧</div><div><strong data-i18n="betterTogether">Better together</strong><p data-i18n="inviteText">Start a study group and learn with friends.</p><button id="create-group" data-i18n="createGroup">Create a group <span>↗</span></button></div>
+              </section>
+            </aside>
+          </div>
+
+          <footer class="footer"><span>© 2026 Learnloop</span><span data-i18n="footerLine">Made for curious minds everywhere <span class="footer-heart">♥</span></span><button id="help-button">Help &amp; feedback</button></footer>
+          </div>
+
+          <section class="curriculum-view" id="curriculum-view" hidden>
+            <button type="button" class="curriculum-back-button" id="curriculum-back">← Back to subjects</button>
+            <header class="curriculum-heading">
+              <div class="quiz-kicker" id="curriculum-kicker"></div>
+              <h1 id="curriculum-title"></h1>
+              <p class="curriculum-grade-focus" id="curriculum-grade-focus"></p>
+              <p class="curriculum-overview" id="curriculum-overview"></p>
+              <p class="curriculum-notice" id="curriculum-notice"></p>
+            </header>
+            <div class="curriculum-lessons" id="curriculum-lessons"></div>
+          </section>
+
+          <section class="admin-view" id="admin-view" hidden>
+            <div class="admin-heading">
+              <div>
+                <div class="eyebrow"><span class="sparkle">✳</span> LEARNLOOP MANAGEMENT</div>
+                <h1>Admin overview</h1>
+                <p class="welcome-subtitle">Monitor competition activity, manage learning papers, and control your platform.</p>
+              </div>
+              <span class="admin-status"><span class="live-dot"></span> All systems operational</span>
+            </div>
+
+            <section class="admin-stats" data-admin-permission="overview" aria-label="Competition statistics">
+              <article class="admin-stat"><span class="admin-stat-icon purple">♧</span><div><span>Student accounts</span><strong id="admin-student-count">0</strong><small>Registered students</small></div></article>
+              <article class="admin-stat"><span class="admin-stat-icon orange">✦</span><div><span>Learning activities</span><strong id="admin-activity-count">0</strong><small>Lessons and challenges</small></div></article>
+              <article class="admin-stat"><span class="admin-stat-icon green">◷</span><div><span>Study time</span><strong id="admin-study-time">0 <small>mins</small></strong><small>Total student progress</small></div></article>
+              <article class="admin-stat"><span class="admin-stat-icon pink">▤</span><div><span>Published papers</span><strong id="paper-count">0</strong><small>Available to learners</small></div></article>
+            </section>
+
+            <section class="admin-panel materials-overview-panel" data-admin-permission="overview" aria-labelledby="materials-overview-title">
+              <div class="admin-panel-heading">
+                <div><h2 id="materials-overview-title">Student study materials</h2><p>Overall view of revision guides, uploaded resources, and video classes available to learners</p></div>
+                <span class="materials-overview-total" id="materials-overview-total">0 materials</span>
+              </div>
+              <div class="materials-overview-stats">
+                <article><span>Revision guides</span><strong id="materials-guide-count">0</strong></article>
+                <article><span>Notes &amp; exams</span><strong id="materials-resource-count">0</strong></article>
+                <article><span>Video classes</span><strong id="materials-video-count">0</strong></article>
+              </div>
+              <div class="materials-overview-filters">
+                <label>Search materials<input id="materials-overview-search" type="search" placeholder="Search title, grade, or subject" /></label>
+                <label>Material type<select id="materials-overview-filter"><option value="all">All materials</option><option value="guide">Revision guides</option><option value="resource">Notes &amp; exams</option><option value="video">Video classes</option></select></label>
+              </div>
+              <div class="table-wrap materials-overview-table-wrap">
+                <table class="competition-table materials-overview-table">
+                  <thead><tr><th>Material</th><th>Type</th><th>Subject</th><th>Grade</th><th>Student availability</th></tr></thead>
+                  <tbody id="materials-overview-rows"></tbody>
+                </table>
+              </div>
+              <p class="materials-overview-note">Grade-specific materials are available to matching student grades. Curriculum revision guides are built into the subject catalogue.</p>
+            </section>
+
+            <div class="admin-grid">
+              <section class="admin-panel achievements-panel" data-admin-permission="achievements">
+                <div class="admin-panel-heading">
+                  <div><h2>Achievement board</h2><p>Create learner badges, recognize progress, and review award history</p></div>
+                  <button class="admin-secondary-button" id="export-achievements" type="button">Export history ↓</button>
+                </div>
+                <div class="achievement-stats" aria-label="Achievement statistics">
+                  <article><span>Achievement badges</span><strong id="achievement-count">0</strong></article>
+                  <article><span>Active awards</span><strong id="achievement-active-awards">0</strong></article>
+                  <article><span>Learners recognized</span><strong id="achievement-learners-recognized">0</strong></article>
+                </div>
+                <div class="achievement-tools">
+                  <form id="achievement-form" class="achievement-form">
+                    <h3 id="achievement-form-heading">Create an achievement</h3>
+                    <label>Badge name<input id="achievement-name" maxlength="60" required placeholder="e.g. Curious Explorer" /></label>
+                    <label>Description<input id="achievement-description" maxlength="200" required placeholder="What did the learner accomplish?" /></label>
+                    <label>Learner name <span class="achievement-form-hint">Optional — award this badge as soon as it is created.</span>
+                      <select id="achievement-student"><option value="">Add to catalogue only</option></select>
+                    </label>
+                    <div class="achievement-form-row">
+                      <label>Category<select id="achievement-category"><option>Learning</option><option>Consistency</option><option>Creativity</option><option>Community</option><option>Custom</option></select></label>
+                      <label>Badge icon<input id="achievement-icon" maxlength="8" required value="🏅" aria-label="Badge icon" /></label>
+                    </div>
+                    <div class="achievement-form-actions">
+                      <button class="admin-secondary-button" id="achievement-submit" type="submit">Create achievement</button>
+                      <button class="text-button" id="achievement-cancel-edit" type="button" hidden>Cancel edit</button>
+                    </div>
+                  </form>
+                  <form id="achievement-award-form" class="achievement-form">
+                    <h3>Award a learner</h3>
+                    <label>Achievement<select id="award-achievement" required></select></label>
+                    <label>Learner name<select id="award-student" required></select></label>
+                    <p class="achievement-form-hint">Only active learner accounts can receive a new award. Revoked awards remain in the history.</p>
+                    <button class="admin-secondary-button" type="submit">Give achievement</button>
+                  </form>
+                  <form id="certificate-form" class="achievement-form">
+                    <h3>Issue an exam certificate</h3>
+                    <label>Learner name<select id="certificate-student" required></select></label>
+                    <label>Uploaded exam<select id="certificate-exam" required></select></label>
+                    <div class="achievement-form-row certificate-score-row">
+                      <label>Score<input id="certificate-score" type="number" min="0" max="100000" step="1" required /></label>
+                      <label>Total marks<input id="certificate-total" type="number" min="1" max="100000" step="1" required /></label>
+                    </div>
+                    <p class="achievement-form-hint">Requires at least 95%. The certificate records the exam, result, requirement, and your admin account name as signature.</p>
+                    <button class="admin-secondary-button" type="submit">Issue certificate</button>
+                  </form>
+                </div>
+                <div class="achievement-catalog-wrap">
+                  <div class="achievement-section-heading"><h3>Badge catalogue</h3><span id="achievement-catalog-count">0 badges</span></div>
+                  <div class="achievement-catalog" id="achievement-catalog"></div>
+                </div>
+                <div class="achievement-section-heading achievement-history-heading"><h3>Award history</h3><button class="admin-secondary-button" id="export-achievements-history" type="button">Export CSV</button></div>
+                <div class="achievement-filters">
+                  <label>Search<input id="achievement-search" type="search" placeholder="Learner, email, badge, or category" /></label>
+                  <label>History<select id="achievement-history-filter"><option value="all">All awards</option><option value="active">Active</option><option value="revoked">Revoked</option></select></label>
+                  <label>Badge<select id="achievement-badge-filter"><option value="all">All badges</option></select></label>
+                </div>
+                <div class="table-wrap achievement-table-wrap">
+                  <table class="competition-table achievement-table">
+                    <thead><tr><th>Achievement</th><th>Learner</th><th>Grade</th><th>Awarded</th><th>Status</th><th>Action</th></tr></thead>
+                    <tbody id="achievement-award-rows"></tbody>
+                  </table>
+                </div>
+                <div class="achievement-section-heading certificate-history-heading"><h3>Issued exam certificates</h3></div>
+                <div class="table-wrap achievement-table-wrap">
+                  <table class="competition-table achievement-table">
+                    <thead><tr><th>Exam</th><th>Learner</th><th>Result</th><th>Requirement</th><th>Signed by</th><th>Issued</th></tr></thead>
+                    <tbody id="admin-certificate-rows"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="admin-panel competition-panel" data-admin-permission="competitions">
+                <div class="admin-panel-heading">
+                  <div><h2>Leadership &amp; achievement scoreboard</h2><p>Compare period XP, learning milestones, and active badges</p></div>
+                  <label class="admin-select-label" for="competition-period">Period
+                    <select id="competition-period">
+                      <option value="week">This week</option>
+                      <option value="month">This month</option>
+                      <option value="all">All time</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="scoreboard-summary" aria-label="Scoreboard summary">
+                  <article><span>Learners shown</span><strong id="scoreboard-learner-count">0</strong></article>
+                  <article><span>XP earned</span><strong id="scoreboard-xp-total">0</strong></article>
+                  <article><span>Active badges</span><strong id="scoreboard-badge-total">0</strong></article>
+                  <article><span>Current leader</span><strong id="scoreboard-leader">—</strong></article>
+                </div>
+                <div class="scoreboard-filters">
+                  <label>Search learners<input id="scoreboard-search" type="search" placeholder="Search by name" /></label>
+                  <label for="scoreboard-grade">Grade
+                    <select id="scoreboard-grade"><option value="all">All grades</option></select>
+                  </label>
+                  <button class="admin-secondary-button" id="export-scoreboard" type="button">Export scoreboard ↓</button>
+                </div>
+                <div class="table-wrap">
+                  <table class="competition-table">
+                    <thead><tr>
+                      <th>Rank</th>
+                      <th><button data-sort="name" aria-label="Sort by learner">Learner ↕</button></th>
+                      <th><button data-sort="points" aria-label="Sort by points">Points ↕</button></th>
+                      <th><button data-sort="achievement_count" aria-label="Sort by active badges">Badges ↕</button></th>
+                      <th><button data-sort="lessons" aria-label="Sort by lessons">Lessons ↕</button></th>
+                    </tr></thead>
+                    <tbody id="competition-rows"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="admin-panel upload-panel" data-admin-permission="resources">
+                <div class="admin-panel-heading"><div><h2>Notes &amp; exams</h2><p>Upload resources for your learners</p></div><span class="upload-icon">↑</span></div>
+                <label class="resource-type-label" for="paper-type">Resource type
+                  <select id="paper-type"><option value="Notes">Notes</option><option value="Exam">Exam</option></select>
+                </label>
+                <label class="resource-type-label" for="resource-grade">Grade
+                  <input id="resource-grade" list="admin-grade-suggestions" maxlength="80" autocomplete="off" placeholder="Choose or type a grade" required />
+                </label>
+                <label class="resource-type-label" for="resource-subject">Subject
+                  <input id="resource-subject" list="resource-subject-suggestions" maxlength="100" autocomplete="off" placeholder="Choose or type a subject" required />
+                </label>
+                <datalist id="resource-subject-suggestions"></datalist>
+                <label class="upload-dropzone" for="paper-upload">
+                  <span class="upload-cloud">↑</span><strong>Choose notes or exams to upload</strong><span>PDF, DOC, DOCX, PPT, PPTX, TXT · up to 20 MB each</span>
+                  <input id="paper-upload" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" multiple />
+                </label>
+                <p class="upload-storage-note">Uploaded resources are saved on the server and available to signed-in students.</p>
+                <div class="paper-list-heading"><strong>Uploaded papers</strong><span id="paper-total">0 files</span></div>
+                <ul class="paper-list" id="paper-list" aria-live="polite"></ul>
+              </section>
+
+              <section class="admin-panel controls-panel" data-admin-permission="settings">
+                <div class="admin-panel-heading"><div><h2>Platform controls</h2><p>Manage key learner-facing settings</p></div></div>
+                <div class="control-row"><span class="control-icon">✦</span><span class="control-copy"><strong>Daily challenge</strong><small>Make today's competition available</small></span><label class="switch"><input type="checkbox" data-setting="challenge" checked aria-label="Enable daily challenge"><span></span></label></div>
+                <div class="control-row"><span class="control-icon">♧</span><span class="control-copy"><strong>New registrations</strong><small>Allow learners to join Learnloop</small></span><label class="switch"><input type="checkbox" data-setting="registrations" checked aria-label="Allow new registrations"><span></span></label></div>
+                <div class="control-row"><span class="control-icon">▤</span><span class="control-copy"><strong>Leaderboard</strong><small>Show competition rankings to learners</small></span><label class="switch"><input type="checkbox" data-setting="leaderboard" checked aria-label="Show leaderboard"><span></span></label></div>
+              </section>
+
+              <section class="admin-panel learners-panel" data-admin-permission="learners">
+                <div class="admin-panel-heading"><div><h2>Learner management</h2><p>Review accounts and access</p></div><button class="admin-secondary-button" id="export-learners">Export list ↓</button></div>
+                <div class="learner-list" id="learner-list"></div>
+              </section>
+              <section class="admin-panel account-admin-panel" data-admin-permission="overview">
+                <div class="admin-panel-heading"><div><h2>Create a student account</h2><p>Create an account directly for a learner</p></div></div>
+                <form id="admin-student-form" class="admin-form-grid">
+                  <label>Full name<input id="admin-student-name" maxlength="60" required autocomplete="name" /></label>
+                  <label>Email address<input id="admin-student-email" type="email" maxlength="254" required autocomplete="email" /></label>
+                  <label>School (optional)<input id="admin-student-school" maxlength="120" autocomplete="organization" /></label>
+                  <label>Grade / level<input id="admin-student-grade" list="admin-grade-suggestions" maxlength="80" required autocomplete="off" /></label>
+                  <label>Password<input id="admin-student-password" type="password" minlength="10" maxlength="128" required autocomplete="new-password" /></label>
+                  <label>Confirm password<input id="admin-student-confirm-password" type="password" minlength="10" maxlength="128" required autocomplete="new-password" /></label>
+                  <button class="admin-secondary-button" type="submit">Create student account</button>
+                </form>
+                <p class="account-removal-note">Deleting a learner account permanently removes that learner’s progress and group memberships.</p>
+              </section>
+              <section class="admin-panel groups-panel" data-admin-permission="groups">
+                <div class="admin-panel-heading"><div><h2>Study &amp; grade groups</h2><p>Create groups and manage exactly who belongs to them</p></div></div>
+                <form id="admin-group-form" class="admin-form-grid">
+                  <label>Group name<input id="admin-group-name" maxlength="80" required placeholder="e.g. Science study circle" /></label>
+                  <label>Group type<select id="admin-group-type"><option value="study">Study group</option><option value="class">Grade/class group</option></select></label>
+                  <label id="admin-group-grade-wrap" hidden>Grade / level<input id="admin-group-grade" list="admin-grade-suggestions" maxlength="80" autocomplete="off" /></label>
+                  <label class="form-wide">Description (optional)<textarea id="admin-group-description" maxlength="300" rows="2"></textarea></label>
+                  <button class="admin-secondary-button" type="submit">Create group</button>
+                </form>
+                <div class="admin-groups-list" id="admin-groups-list" aria-live="polite"></div>
+              </section>
+              <section class="admin-panel activity-panel" data-admin-permission="overview">
+                <div class="admin-panel-heading"><div><h2>Recent learning activity</h2><p>Latest student progress</p></div></div>
+                <div class="activity-list" id="admin-activity-list"></div>
+              </section>
+              <section class="admin-panel video-admin-panel" data-admin-permission="classes">
+                <div class="admin-panel-heading"><div><h2>Video classes</h2><p>Publish grade-specific recorded lessons</p></div></div>
+                <form id="class-form" class="admin-form-grid">
+                  <label>Class title<input id="class-title" maxlength="120" required placeholder="e.g. Introduction to fractions" /></label>
+                  <label>Subject<input id="class-subject" list="class-subject-suggestions" maxlength="100" autocomplete="off" placeholder="Choose or type a subject" required /></label>
+                  <label>Grade<input id="class-grade" list="admin-grade-suggestions" maxlength="80" autocomplete="off" placeholder="Choose or type a grade" required /></label>
+                  <datalist id="class-subject-suggestions"></datalist>
+                  <label>Video link<input id="class-video-url" type="url" required placeholder="https://youtube.com/watch?v=..." /></label>
+                  <label>Scheduled (optional)<input id="class-scheduled-at" type="datetime-local" /></label>
+                  <label class="form-wide">Description<textarea id="class-description" maxlength="500" rows="2" placeholder="What will learners study?"></textarea></label>
+                  <button class="admin-secondary-button" type="submit">Publish video class</button>
+                </form>
+                <div class="admin-class-list" id="admin-class-list"></div>
+              </section>
+              <section class="admin-panel delegated-admin-panel" data-admin-permission="delegates">
+                <div class="admin-panel-heading"><div><h2>Task admins &amp; invites</h2><p>Invite helpers with limited permissions</p></div></div>
+                <form id="invite-form" class="admin-form-grid">
+                  <label>Helper email<input id="invite-email" type="email" required maxlength="254" placeholder="teacher@school.ac.ke" /></label>
+                  <label>Allowed grades<select id="invite-grade" multiple size="4"></select><small>Select one or more grades; custom grades can be entered below.</small></label>
+                  <label>Other grades<input id="invite-custom-grades" maxlength="400" placeholder="Comma-separated grade / level names" /><small>Optional custom grade scopes, separated by commas.</small></label>
+                  <label>Assigned video sessions<select id="invite-session" multiple size="4"></select><small>Optional: choose from published classes. Publish a video class first if the list is empty.</small></label>
+                  <fieldset class="invite-permissions form-wide">
+                    <legend>Allowed tasks</legend>
+                    <label><input type="checkbox" value="classes" /> Manage video classes</label>
+                    <label><input type="checkbox" value="resources" /> Add and remove notes and exams</label>
+                    <label><input type="checkbox" value="learners" /> Suspend or restore students</label>
+                  </fieldset>
+                  <button class="admin-secondary-button" type="submit">Create invite link</button>
+                </form>
+                <div class="invite-result" id="invite-result" hidden>
+                  <p>Share this one-time link privately. It expires in 7 days.</p>
+                  <div><input id="invite-link" readonly aria-label="Invitation link" /><button class="admin-secondary-button" id="copy-invite-link" type="button">Copy link</button></div>
+                </div>
+                <div class="admin-delegates-list" id="admin-delegates-list"></div>
+              </section>
+            </div>
+            <footer class="footer"><span>© 2026 Learnloop · Admin</span><span hidden>Changes are saved to the server</span><button id="admin-help-button">Help &amp; feedback</button></footer>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog class="challenge-dialog" id="challenge-dialog">
+      <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close challenge">×</button></form>
+      <div class="quiz-content" id="quiz-content">
+        <div class="quiz-kicker"><span class="live-dot"></span> DAILY CHALLENGE · QUESTION 1 OF 3</div>
+        <div class="quiz-progress"><span></span></div>
+        <h2>Which planet is known as the Red Planet?</h2>
+        <p>Choose your answer to earn points</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-answer="wrong">Venus <span></span></button>
+          <button class="quiz-option" data-answer="correct">Mars <span></span></button>
+          <button class="quiz-option" data-answer="wrong">Jupiter <span></span></button>
+          <button class="quiz-option" data-answer="wrong">Mercury <span></span></button>
+        </div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+      </div>
+    </dialog>
+    <dialog class="challenge-dialog lesson-dialog" id="lesson-dialog">
+      <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close lesson">×</button></form>
+      <div class="quiz-content">
+        <div class="quiz-kicker"><span class="live-dot"></span> BEGINNER LESSON · BIOLOGY</div>
+        <h2>Your first lesson: living things</h2>
+        <p>Living things grow, use energy, and respond to the world around them. Plants, animals, and tiny organisms are all part of biology—the study of life.</p>
+        <div class="lesson-fact"><strong>Try this:</strong> Name one living thing you saw today. Notice what it needs to grow.</div>
+        <button type="button" class="auth-submit lesson-complete-button" id="complete-first-lesson">Mark lesson complete <span>+50 XP</span></button>
+      </div>
+    </dialog>
+    <dialog class="challenge-dialog subject-resource-dialog" id="subject-resource-dialog">
+      <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close subject notes">×</button></form>
+      <div class="quiz-content">
+        <div class="quiz-kicker">SUBJECT RESOURCES</div>
+        <h2 id="subject-resource-title"></h2>
+        <p id="subject-resource-grade"></p>
+        <form id="subject-resource-form" class="subject-resource-form">
+          <label class="resource-type-label" for="subject-resource-kind">Resource type
+            <select id="subject-resource-kind"><option value="Notes">Notes</option><option value="Exam">Exam</option></select>
+          </label>
+          <label class="upload-dropzone" for="subject-resource-files">
+            <span class="upload-cloud">↑</span><strong>Choose notes or exams to upload</strong><span>PDF, DOC, DOCX, PPT, PPTX, TXT · up to 20 MB each</span>
+            <input id="subject-resource-files" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" multiple required />
+          </label>
+          <button class="admin-secondary-button" type="submit">Upload to this subject</button>
+        </form>
+        <ul class="paper-list subject-resource-list" id="subject-resource-list" aria-live="polite"></ul>
+      </div>
+    </dialog>
+    <dialog class="challenge-dialog video-dialog" id="video-dialog">
+      <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close video class">×</button></form>
+      <div class="quiz-content"><div class="quiz-kicker"><span class="live-dot"></span> LEARNLOOP VIDEO CLASS</div><h2 id="video-dialog-title"></h2><p id="video-dialog-description"></p><div class="video-frame-wrap"><iframe id="video-player" title="Video class" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+    </dialog>
+    <dialog class="challenge-dialog certificate-dialog" id="certificate-dialog" aria-labelledby="certificate-title">
+      <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close certificate">×</button></form>
+      <article class="certificate-document" id="certificate-document">
+        <div class="certificate-kicker">LEARNLOOP · CERTIFICATE OF ACHIEVEMENT</div>
+        <h2 id="certificate-title">Certificate of Achievement</h2>
+        <p class="certificate-intro">This certificate is proudly presented to</p>
+        <p class="certificate-learner" id="certificate-learner"></p>
+        <p class="certificate-description">for completing the assessment below.</p>
+        <dl class="certificate-details">
+          <div><dt>Assessment</dt><dd id="certificate-assessment"></dd></div>
+          <div><dt>Result</dt><dd id="certificate-result"></dd></div>
+          <div><dt>Requirement</dt><dd id="certificate-requirement"></dd></div>
+          <div><dt>Date</dt><dd id="certificate-date"></dd></div>
+        </dl>
+        <div class="certificate-signature"><span id="certificate-signature"></span><small>Administrator</small></div>
+      </article>
+      <div class="certificate-actions">
+        <button class="admin-secondary-button" id="print-certificate" type="button">Print certificate</button>
+        <button class="text-button" id="close-certificate" type="button">Close</button>
+      </div>
+    </dialog>
+    <datalist id="grade-suggestions"></datalist>
+    <datalist id="admin-grade-suggestions"></datalist>
+  </body>
+</html>

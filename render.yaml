@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: learnloop
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/auth/status
+    envVars:
+      - key: COOKIE_SECURE
+        value: "1"
+      - key: LEARNLOOP_DATA_DIR
+        value: /var/data
+      - key: LEARNLOOP_HOST
+        value: 0.0.0.0
+      - key: ADMIN_SETUP_KEY
+        generateValue: true
+    disk:
+      name: learnloop-data
+      mountPath: /var/data
+      sizeGB: 1
